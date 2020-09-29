@@ -7,7 +7,7 @@ class TestDao {
   final dbProvider = DatabaseProvider.dbProvider;
 
   //Add new records
-  Future<int> createTodo(TestModel testModel) async {
+  Future<int> createItem(TestModel testModel) async {
     final db = await dbProvider.database;
     var result = db.insert(testTable, testModel.toDatabaseJson());
     return result;
@@ -46,6 +46,7 @@ class TestDao {
     final db = await dbProvider.database;
     var result = await db.update(
       testTable,
+      testModel.toDatabaseJson(),
       where: 'id = ?',
       whereArgs: [testModel.id]
     );
